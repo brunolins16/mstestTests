@@ -26,4 +26,4 @@ steps:
     testSelector: 'testAssemblies'
     testAssemblyVer2: '**\*SampleTests*.dll'
     searchFolder: '$(System.DefaultWorkingDirectory)'
-    otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v3.0 /logger:console;verbosity="normal"'
+    otherConsoleOptions: '/framework:".NETCoreApp,Version=v2.0"'
