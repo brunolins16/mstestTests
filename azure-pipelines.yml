@@ -34,3 +34,5 @@ jobs:
       testAssemblyVer2: '**/SampleTests.dll'
       searchFolder: '$(Build.ArtifactStagingDirectory)'
       otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
+      batchingBasedOnAgentsOption: 'customBatchSize'
+      customBatchSizeValue: '1'
