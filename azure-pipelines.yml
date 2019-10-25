@@ -6,33 +6,38 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'windows-latest'
-
-steps:
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-    projects: '**/SampleTests/SampleTests.csproj'
-    feedsToUse: 'select'
-  displayName: '.NET Core (Restore)'
-- task: VisualStudioTestPlatformInstaller@1
-  inputs:
-    packageFeedSelector: 'nugetOrg'
-    versionSelector: 'latestPreRelease'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/SampleTests/SampleTests.csproj'
-    arguments: '--framework netcoreapp3.0 --configuration Release --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: false
-  displayName: '.NET Core (Publish)'
-- task: VSTest@2
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: '**/SampleTests.dll'
-    searchFolder: '$(Build.ArtifactStagingDirectory)'
-    vsTestVersion: 'toolsInstaller'
-    otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
+jobs:
+- job: RunTest1
+  displayName: 'Run Tests'
+  pool: Default
+  strategy:
+    parallel: 2
+  variables: { vstest.customConsoleWrapperAssemblyLocation: '$(Build.ArtifactStagingDirectory)\CustomWrapper\lib\net461\SampleCustomVsConsoleWrapper.dll' }
+  steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      projects: '**/SampleTests/SampleTests.csproj'
+      feedsToUse: 'select'
+    displayName: '.NET Core (Restore)'
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      publishWebProjects: false
+      projects: '**/SampleTests/SampleTests.csproj'
+      arguments: '--framework netcoreapp3.0 --configuration Release --output $(Build.ArtifactStagingDirectory)'
+      zipAfterPublish: false
+    displayName: '.NET Core (Publish)'
+  - task: ExtractFiles@1
+    inputs:
+      archiveFilePatterns: '**/SampleCustomVsConsoleWrapper.*.nupkg'
+      destinationFolder: '$(Build.ArtifactStagingDirectory)\CustomWrapper'
+      cleanDestinationFolder: true 
+  - task: VSTest@2
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: '**/SampleTests.dll'
+      searchFolder: '$(Build.ArtifactStagingDirectory)'
+      otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
+      batchingBasedOnAgentsOption: 'customBatchSize'
+      customBatchSizeValue: '1'
