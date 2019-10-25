@@ -17,10 +17,10 @@ namespace SampleTests
             Assert.Inconclusive();
         }
 
-        [TestMethod]
-        public void TestMethod3()
-        {
-            Assert.Fail();
-        }
+        //[TestMethod]
+        //public void TestMethod3()
+        //{
+        //    Assert.Fail();
+        //}
     }
 }
