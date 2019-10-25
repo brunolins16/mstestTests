@@ -13,6 +13,11 @@ steps:
 - script: echo Hello, world!
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'restore'
+    projects: '**/SampleTests/SampleTests.csproj'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'build'
     projects: '**/SampleTests/SampleTests.csproj'
   displayName: 'Run a one-line script'
