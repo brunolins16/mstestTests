@@ -30,5 +30,4 @@ steps:
     testSelector: 'testAssemblies'
     testAssemblyVer2: '**/SampleTests.dll'
     searchFolder: '$(Build.ArtifactStagingDirectory)'
-    vsTestVersion: 'toolsInstaller'
     otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
