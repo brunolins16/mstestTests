@@ -10,20 +10,29 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- script: echo Hello, world!
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
     projects: '**/SampleTests/SampleTests.csproj'
     feedsToUse: 'select'
+  displayName: '.NET Core (Restore)'
+- task: VisualStudioTestPlatformInstaller@1
+  inputs:
+    packageFeedSelector: 'nugetOrg'
+    versionSelector: 'latestPreRelease'
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'build'
+    command: 'publish'
+    publishWebProjects: false
     projects: '**/SampleTests/SampleTests.csproj'
-  displayName: 'Run a one-line script'
+    arguments: '--framework netcoreapp3.0 --configuration Release --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: false
+  displayName: '.NET Core (Publish)'
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\*SampleTests*.dll'
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-    otherConsoleOptions: '/framework:".NETCoreApp,Version=v2.0"'
+    testAssemblyVer2: '**/SampleTests.dll'
+    searchFolder: '$(Build.ArtifactStagingDirectory)'
+    vsTestVersion: 'toolsInstaller'
+    otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
