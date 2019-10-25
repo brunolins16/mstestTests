@@ -10,6 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
@@ -25,13 +26,13 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/SampleTests/SampleTests.csproj'
-    arguments: '--framework netcoreapp3.0 --configuration Release'
+    arguments: '--framework netcoreapp3.0 --configuration Release --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: false
   displayName: '.NET Core (Publish)'
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\*SampleTests*.dll'
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+    testAssemblyVer2: '*.dll'
+    searchFolder: '$(Build.ArtifactStagingDirectory)'
     vsTestVersion: 'toolsInstaller'
     otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
