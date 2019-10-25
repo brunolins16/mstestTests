@@ -22,9 +22,14 @@ steps:
     projects: '**/SampleTests/SampleTests.csproj'
     arguments: '--framework netcoreapp3.0 --configuration Release'
   displayName: '.NET Core (Build)'
+- task: VisualStudioTestPlatformInstaller@1
+  inputs:
+    packageFeedSelector: 'nugetOrg'
+    versionSelector: 'latestPreRelease'
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: '**\*SampleTests*.dll'
     searchFolder: '$(System.DefaultWorkingDirectory)'
+    vsTestVersion: 'toolsInstaller'
     otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
