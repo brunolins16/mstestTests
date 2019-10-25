@@ -22,5 +22,11 @@ namespace SampleTests
         {
             Assert.Fail();
         }
+
+        [TestMethod]
+        public void TestMethod4()
+        {
+            Assert.IsTrue(true);
+        }
     }
 }
