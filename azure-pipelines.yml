@@ -12,7 +12,7 @@ jobs:
   pool: Default
   strategy:
     parallel: 2
-  variables: { vstest.customConsoleWrapperAssemblyLocation: '$(Build.ArtifactStagingDirectory)\SampleTests\assets\CustomWrapper\SampleCustomVsConsoleWrapper.dll' }
+  variables: { vstest.customConsoleWrapperAssemblyLocation: '$(Build.ArtifactStagingDirectory)\CustomWrapper\lib\net461\SampleCustomVsConsoleWrapper.dll' }
   steps:
   - task: DotNetCoreCLI@2
     inputs:
@@ -28,6 +28,11 @@ jobs:
       arguments: '--framework netcoreapp3.0 --configuration Release --output $(Build.ArtifactStagingDirectory)'
       zipAfterPublish: false
     displayName: '.NET Core (Publish)'
+  - task: ExtractFiles@1
+    inputs:
+      archiveFilePatterns: '**/SampleCustomVsConsoleWrapper.*.nupkg'
+      destinationFolder: '$(Build.ArtifactStagingDirectory)\CustomWrapper'
+      cleanDestinationFolder: true 
   - task: VSTest@2
     inputs:
       testSelector: 'testAssemblies'
