@@ -6,11 +6,11 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'windows-latest'
+pool: Default
+
+variables: { vstest.customConsoleWrapperAssemblyLocation: '$(Build.ArtifactStagingDirectory)\SampleTests\assets\CustomWrapper\SampleCustomVsConsoleWrapper.dll' }
 
 steps:
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
