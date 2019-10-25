@@ -32,7 +32,7 @@ steps:
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**/*.dll'
+    testAssemblyVer2: '**/SampleTests.dll'
     searchFolder: '$(Build.ArtifactStagingDirectory)'
     vsTestVersion: 'toolsInstaller'
     otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
