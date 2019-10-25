@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- script: echo Hello, world!
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/SampleTests/SampleTests.csproj'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/SampleTests/SampleTests.csproj'
+  displayName: 'Run a one-line script'
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: '**\*SampleTests*.dll'
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    otherConsoleOptions: '/framework:".NETCoreApp,Version=v2.0"'
