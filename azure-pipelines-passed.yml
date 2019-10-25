@@ -38,7 +38,7 @@ jobs:
       testSelector: 'testAssemblies'
       testAssemblyVer2: '**/SampleTests.dll'
       searchFolder: '$(Build.ArtifactStagingDirectory)'
-      testFiltercriteria: 'Name!=TestMethod2'
+      testFiltercriteria: 'Name!=TestMethod3'
       otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
       batchingBasedOnAgentsOption: 'customBatchSize'
       customBatchSizeValue: '1'
