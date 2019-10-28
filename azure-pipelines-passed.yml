@@ -12,7 +12,6 @@ jobs:
   pool: Default
   strategy:
     parallel: 2
-  variables: { vstest.customConsoleWrapperAssemblyLocation: '$(Build.ArtifactStagingDirectory)\CustomWrapper\lib\net461\SampleCustomVsConsoleWrapper.dll' }
   steps:
   - task: DotNetCoreCLI@2
     inputs:
