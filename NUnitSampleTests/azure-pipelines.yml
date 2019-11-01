@@ -16,22 +16,17 @@ jobs:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'restore'
-      projects: '**/SampleTests/NUnitSampleTests.csproj'
+      projects: '**/NUnitSampleTests/NUnitSampleTests.csproj'
       feedsToUse: 'select'
     displayName: '.NET Core (Restore)'
   - task: DotNetCoreCLI@2
     inputs:
       command: 'publish'
       publishWebProjects: false
-      projects: '**/SampleTests/NUnitSampleTests.csproj'
+      projects: '**/NUnitSampleTests/NUnitSampleTests.csproj'
       arguments: '--framework netcoreapp3.0 --configuration Release --output $(Build.ArtifactStagingDirectory)'
       zipAfterPublish: false
     displayName: '.NET Core (Publish)'
-  - task: ExtractFiles@1
-    inputs:
-      archiveFilePatterns: '**/SampleCustomVsConsoleWrapper.*.nupkg'
-      destinationFolder: '$(Build.ArtifactStagingDirectory)\CustomWrapper'
-      cleanDestinationFolder: true 
   - task: VSTest@2
     inputs:
       testSelector: 'testAssemblies'

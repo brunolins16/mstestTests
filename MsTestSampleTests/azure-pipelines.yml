@@ -27,11 +27,6 @@ jobs:
       arguments: '--framework netcoreapp3.0 --configuration Release --output $(Build.ArtifactStagingDirectory)'
       zipAfterPublish: false
     displayName: '.NET Core (Publish)'
-  - task: ExtractFiles@1
-    inputs:
-      archiveFilePatterns: '**/SampleCustomVsConsoleWrapper.*.nupkg'
-      destinationFolder: '$(Build.ArtifactStagingDirectory)\CustomWrapper'
-      cleanDestinationFolder: true 
   - task: VSTest@2
     inputs:
       testSelector: 'testAssemblies'
