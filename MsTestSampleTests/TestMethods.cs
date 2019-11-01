@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SampleTests
+namespace MsTestSampleTests
 {
     [TestClass]
-    public class UnitTest1
+    public class TestMethods
     {
         [TestMethod]
         [Priority(0)]
