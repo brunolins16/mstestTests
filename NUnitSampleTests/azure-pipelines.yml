@@ -35,4 +35,3 @@ jobs:
       otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
       batchingBasedOnAgentsOption: 'customBatchSize'
       runSettingsFile: 'sample.runsettings'
-      customBatchSizeValue: '1'
