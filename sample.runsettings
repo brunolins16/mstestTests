@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TestConfiguration>
- <TestIterations>3</TestIterations>
- <EnableWarmupIteration>false</EnableWarmupIteration>
+<RunSettings>
+    <TestConfiguration>
+        <TestIterations>3</TestIterations>
+        <EnableWarmupIteration>false</EnableWarmupIteration>
+    </TestConfiguration>
 </RunSettings>
