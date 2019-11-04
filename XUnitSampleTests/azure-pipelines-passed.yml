@@ -16,23 +16,24 @@ jobs:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'restore'
-      projects: '**/XUnitSampleTests/MsTestSampleTests.cspro'
+      projects: '**/XUnitSampleTests/XUnitSampleTests.csproj'
       feedsToUse: 'select'
     displayName: '.NET Core (Restore)'
   - task: DotNetCoreCLI@2
     inputs:
       command: 'publish'
       publishWebProjects: false
-      projects: '**/XUnitSampleTests/MsTestSampleTests.cspro'
+      projects: '**/XUnitSampleTests/XUnitSampleTests.csproj'
       arguments: '--framework netcoreapp3.0 --configuration Release --output $(Build.ArtifactStagingDirectory)'
       zipAfterPublish: false
     displayName: '.NET Core (Publish)'
   - task: VSTest@2
     inputs:
       testSelector: 'testAssemblies'
-      testAssemblyVer2: '**/MsTestSampleTests.dll'
+      testAssemblyVer2: '**/XUnitSampleTests.dll'
       searchFolder: '$(Build.ArtifactStagingDirectory)'
       testFiltercriteria: 'Name!=TestMethod3'
       otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
       batchingBasedOnAgentsOption: 'customBatchSize'
+      runSettingsFile: 'sample.runsettings'
       customBatchSizeValue: '1'
