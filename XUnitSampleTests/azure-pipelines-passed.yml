@@ -32,7 +32,6 @@ jobs:
       testSelector: 'testAssemblies'
       testAssemblyVer2: '**/XUnitSampleTests.dll'
       searchFolder: '$(Build.ArtifactStagingDirectory)'
-      testFiltercriteria: 'FullyQualifiedName!=XUnitSampleTests.TestMethods.TestMethod3'
       otherConsoleOptions: '/framework:".NETCoreApp,Version=v3.0"'
       batchingBasedOnAgentsOption: 'customBatchSize'
       runSettingsFile: 'sample.runsettings'
