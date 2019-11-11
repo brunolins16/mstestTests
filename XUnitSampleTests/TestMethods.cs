@@ -6,7 +6,7 @@ namespace XUnitSampleTests
     public class TestMethods
     {
         [Fact]
-        [Trait("Priority",0)]
+        [Trait("Priority", "0")]
         public void TestMethod1()
         {
             Assert.True(true);
